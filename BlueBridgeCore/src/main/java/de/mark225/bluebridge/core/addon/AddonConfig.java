@@ -13,7 +13,6 @@ public abstract class AddonConfig {
 
     protected FileConfiguration config;
     private static Pattern rgbaRegex = Pattern.compile("[0-9a-f]{8}");
-    private static Pattern rgbRegex = Pattern.compile("[0-9a-f]{6}");
 
     public synchronized void init(FileConfiguration config) {
         this.config = config;
@@ -47,10 +46,10 @@ public abstract class AddonConfig {
     }
 
     public synchronized Color defaultOutlineColor() {
-        String rgb = config.getString("defaultOutlineColor", "");
-        if (!rgbRegex.matcher(rgb).matches())
+        String rgba = config.getString("defaultOutlineColor", "");
+        if (!rgbaRegex.matcher(rgba).matches())
             return BlueBridgeConfig.defaultOutlineColor();
-        return new Color("#" + rgb);
+        return new Color("#" + rgba);
     }
 
     public synchronized String markerSetName() {

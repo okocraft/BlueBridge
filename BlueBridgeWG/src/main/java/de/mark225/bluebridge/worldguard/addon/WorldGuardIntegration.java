@@ -107,15 +107,19 @@ public class WorldGuardIntegration {
                 Color colorRGBA = null;
                 if (color != null && hexPatternRGBA.matcher(color).matches()) {
                     colorRGBA = new Color("#" + color);
-                } else {
+                } else if (pr.hasMembersOrOwners()) {
                     colorRGBA = BlueBridgeWGConfig.getInstance().defaultColor();
+                } else {
+                    colorRGBA = BlueBridgeWGConfig.getInstance().unownedDefaultColor();
                 }
                 String bordercolor = pr.getFlag(OUTLINE_FLAG);
                 Color colorRGB = null;
                 if (bordercolor != null && hexPatternRGB.matcher(bordercolor).matches()) {
                     colorRGB = new Color("#" + bordercolor);
-                } else {
+                } else if (pr.hasMembersOrOwners()) {
                     colorRGB = BlueBridgeWGConfig.getInstance().defaultOutlineColor();
+                } else {
+                    colorRGB = BlueBridgeWGConfig.getInstance().unownedDefaultOutlineColor();
                 }
                 StateFlag.State depthCheckVal = pr.getFlag(DEPTH_CHECK_FLAG);
                 boolean depthCheck = depthCheckVal != null ? depthCheckVal == StateFlag.State.ALLOW : BlueBridgeWGConfig.getInstance().defaultDepthCheck();
