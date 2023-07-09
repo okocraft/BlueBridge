@@ -19,6 +19,7 @@ import de.mark225.bluebridge.core.region.RegionSnapshotBuilder;
 import de.mark225.bluebridge.core.util.BlueBridgeUtils;
 import de.mark225.bluebridge.worldguard.BlueBridgeWG;
 import de.mark225.bluebridge.worldguard.config.BlueBridgeWGConfig;
+import de.mark225.bluebridge.worldguard.util.PolygonalRegionRenderer;
 import de.mark225.bluebridge.worldguard.util.RegionStringLookup;
 import org.bukkit.Bukkit;
 
@@ -171,7 +172,7 @@ public class WorldGuardIntegration {
             list.add(new Vector2d(min.getX(), max.getY() + 1));
             return list;
         }
-        return region.getPoints().stream().map(bv2 -> new Vector2d(bv2.getX() + 0.5, bv2.getZ() + 0.5)).collect(Collectors.toList());
+        return PolygonalRegionRenderer.render(region);
     }
 
     private int polygonArea(List<BlockVector2> coordinates) {
